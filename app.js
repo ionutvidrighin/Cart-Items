@@ -25,8 +25,8 @@ selectionItem3.addEventListener('click', () => {
     optionItem3.classList.toggle('options-active');
 })
 
-const basket = document.querySelector('.basket-btn');
-basket.onclick = () => {
+const basketBtn = document.querySelector('.basket-btn');
+basketBtn.onclick = () => {
     const basketContainer = document.querySelector('.basket-container');
     basketContainer.classList.toggle('basket-container-active');
 } 
@@ -36,35 +36,39 @@ basket.onclick = () => {
 
     shoeSize.forEach((size) => {
         size.addEventListener('click', (event) => {
+            let askUser = confirm('Please confirm your selection');
 
-            let cartItems = {};
+            if(askUser) {
+                let cartItems = {};
 
-            cartItems.image = event.target.parentElement.parentElement.parentElement.children[1].children[0].src;
-            cartItems.name = size.getAttribute('data-productName');
-            cartItems.size = size.getAttribute('data-productSize');
-            cartItems.price = size.getAttribute('data-price');
+                cartItems.image = event.target.parentElement.parentElement.parentElement.children[1].children[0].src;
+                cartItems.name = size.getAttribute('data-productName');
+                cartItems.size = size.getAttribute('data-productSize');
+                cartItems.price = size.getAttribute('data-price');
 
-            const createShoppingCart = document.createElement("div");
-            createShoppingCart.classList.add('all-cart-items');
-            
-            createShoppingCart.innerHTML = `
-            <div class="item-image-name">
-                <img src="${cartItems.image}" alt="shoe">
-                <p> ${cartItems.name} </p>
-            </div>
+                const createShoppingCart = document.createElement("div");
+                createShoppingCart.classList.add('all-cart-items');
+                
+                createShoppingCart.innerHTML = `
+                <div class="item-image-name">
+                    <img src="${cartItems.image}" alt="shoe">
+                    <p> ${cartItems.name} </p>
+                </div>
 
-            <div class="item-size-price">
-                <p>Selected size: </p>
-                <p> ${cartItems.size} </p>
+                <div class="item-size-price">
+                    <p>Selected size: </p>
+                    <p> ${cartItems.size} </p>
 
-                <p>Price: </p>
-                <p class="price"> ${cartItems.price} </p>
-            <div>
-            `;
+                    <p>Price: </p>
+                    <p class="price"> ${cartItems.price} </p>
+                <div>
+                `;
 
-            const insertData = document.querySelector('.basket-container');
-            insertData.appendChild(createShoppingCart);
-            calculate();
+                const insertData = document.querySelector('.basket-container');
+                insertData.appendChild(createShoppingCart);
+                calculate();
+            } 
+            return;
         })
     }) 
 
