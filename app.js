@@ -68,7 +68,7 @@ basketBtn.onclick = () => {
                 insertData.appendChild(createShoppingCart);
                 calculate();
             } 
-            return;
+             return;
         })
     }) 
 
